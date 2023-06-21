@@ -1,0 +1,106 @@
+<%-include("../includes/head.ejs")%>
+
+</head>
+<body class="p-0 m-0 h-full text-black">
+    <%-include("../includes/navBarWOV.ejs")%>
+ <!-- Body -->
+    <section class="flex w-full mb-30px flex-col items-center justify-center mt-60px">
+        <!-- Email  -->
+        <div class="my-4 flex flex-col items-stretch justify-start w-450px max-w-90vw relative text-13px leading-5 min-h-68px shadow-profileInfo rounded-3xl p-6 border-1px border-hoverSideColor">
+            <h1 class="text-sm font-bold">Email Address</h1>
+            <label for="" class="block mt-15px mb-5px max-w-full ">
+                <div class="flex flex-col text-13px leading-5 ">
+                    <div class="relative flex items-center">
+                        <input disabled  type="text" class="cursor-not-allowed w-full z-1 pl-3 h-9 rounded-6px border-1px text-[#889397] bg-[#E8EDEB] border-[#C1C7C6] outline-0 " value="<%=user.email%>">
+                    </div>
+                </div>
+            </label>
+        </div>
+        <!-- Profile -->
+        <div class="my-4 flex flex-col items-stretch justify-start w-450px max-w-90vw relative text-13px leading-5 min-h-68px shadow-profileInfo rounded-3xl p-6 border-1px border-hoverSideColor">
+            <form action="/edit-profile" method="post">
+                <input type="hidden" name="userId" value="<%=user._id%>">
+            <h1 class="text-sm font-bold">Profile</h1>
+            <div class="flex">
+                <!-- First Name -->
+                <div class="mr-5 w-1/2 ">
+            <label for="" class="block mt-15px mb-5px max-w-full ">
+                <div class="flex flex-col text-13px leading-5">
+                    <div class="font-bold pb-1">First Name</div>
+                    <div class="relative flex items-center z-0 ">
+                        <input type="text" class=" w-full z-1 pl-3 h-9 rounded-6px border-1px text-[#889397] border-[#C1C7C6] outline-0 "name="firstName" value="<%=oldInputs.firstName%>">
+                       
+                    </div>
+                    <p class="text-sm mt-1 text-[#D8000C]">
+                     <%if(validationErrors.find(e=>e.param==='firstName')){%>
+                <%let i=validationErrors.findIndex(e=>e.param==='firstName')%>
+                <%=validationErrors[i].msg %>
+            <%}%>
+            </p>
+                </div>
+            </label>
+
+                </div>
+                <!-- Last Name -->
+                <div class=" w-1/2 ">
+            <label for="" class="block mt-15px mb-5px max-w-full ">
+                <div class="flex flex-col text-13px leading-5">
+                    <div class="font-bold pb-1">Last Name</div>
+                    <div class="relative flex items-center z-0 ">
+                        <input type="text" class=" w-full z-1 pl-3 h-9 rounded-6px border-1px text-[#889397] border-[#C1C7C6] outline-0 " name="lastName" value="<%=oldInputs.lastName%>">
+                       
+                    </div>
+                     <p class="text-sm mt-1 text-[#D8000C]">
+                        <%if(validationErrors.find(e=>e.param==='lastName')){%>
+                <%let i=validationErrors.findIndex(e=>e.param==='lastName')%>
+                <%=validationErrors[i].msg %>
+            <%}%>
+            </p>
+                </div>
+            </label>
+
+                </div>
+            </div>
+           <label for="" class="block mt-15px mb-5px max-w-full ">
+                <div class="flex flex-col text-13px leading-5">
+                    <div class="font-bold pb-1">Country (optional)</div>
+                    <div class="border-1px border-[#B9BDBE] rounded-3px ">
+                        <select name="country" value="<%=oldInputs.country%>" id="country" class="w-full h-34px py-1.5 px-3 text-[#5C6C75] rounded-3px border-r-12px border-r-transparent outline-0 " >
+                            <option value>Select A Country</option>
+                        </select>
+                    </div>
+                </div>
+            </label>
+            <button class="mt-30px self-end p-0 border-1px border-sandyBrown items-stretch relative cursor-pointer inline-flex z-0 rounded-6px bg-sandyBrown text-white text-13px leading-5 h-9 font-medium hover:shadow-addBtn">
+                <div class="hidden absolute ring-0 rounded-5px"></div>
+                <div class="grid grid-flow-col justify-center items-center w-full min-h-full h-9 px-11px relative gap-2">Save Changes</div>
+            </button>
+            </form>
+        </div>
+        <!-- Clear Data -->
+        <div class="my-4 flex flex-col items-stretch justify-start w-450px max-w-90vw relative text-13px leading-5 min-h-68px shadow-profileInfo rounded-3xl p-6 border-1px border-hoverSideColor">
+             <form action="/clear-data" method="post">
+            <input type="hidden" name="userId" value="<%=user._id%>">
+            <h1 class="text-sm font-bold mb-4 ">Clear Data</h1>
+            <p>You will lose All the account data once the request has been submitted</p>
+            <button type="submit" class="box-content px-2 mt-4 w-fit flex flex-row  border-1px border-[#D83030] items-center reltaive cursor-pointer z-0 rounded-6px bg-[#D83030] text-white text-13px font-medium leading-5 h-9 hover:shadow-addBtn">Clear Data</button>
+            </form>
+            
+        </div>
+        <!-- Delete Account -->
+        <div class="my-4 flex flex-col items-stretch justify-start w-450px max-w-90vw relative text-13px leading-5 min-h-68px shadow-profileInfo rounded-3xl p-6 border-1px border-hoverSideColor">
+            <form action="/delete-account" method="post">
+                <input type="hidden" name="userId" value="<%=user._id%>">
+            <h1 class="text-sm font-bold mb-4 ">Delete Account</h1>
+            <p>You will lose access to your account once your deletion request has been submitted</p>
+            <button type="submit" class="box-content px-2 mt-4 w-fit flex flex-row  border-1px border-[#D83030] items-center reltaive cursor-pointer z-0 rounded-6px bg-[#D83030] text-white text-13px font-medium leading-5 h-9 hover:shadow-addBtn">Delete Account</button>
+            </form>
+        </div>
+    </section>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   <script src="profile-script.js"></script> 
+   <script src="/js/profile-script.js"></script> 
+
+    <%-include("../includes/end.ejs")%>
+
+

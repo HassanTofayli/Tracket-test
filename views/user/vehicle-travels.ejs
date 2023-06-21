@@ -1,0 +1,178 @@
+<%-include("../includes/head.ejs")%>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<body class="p-0 m-0 h-full text-black">
+  
+<!-- Main Layout -->
+<div class="grid template m-0 bg-white max-w-full w-screen">
+    <!-- Header -->
+    <div class="fixed right-0 top-0 left-0 h-60px z-101 shadow-nav">
+        <nav class="relative flex items-center justify-between w-full px-4 text-sm leading-4 h-full border-b-1px border-b-platinum">
+            <div class=" realtive flex items-center gap-3.5">
+                <div class="flex items-center mr-1">
+                    <img src="/images/pin-mark.png" alt="" class="w-10">
+                     <h1 class="font-medium text-xl text-black">Tracket</h1>
+                </div>
+                <!-- vehicles menu -->
+                <div class="relative flex items-center justify-center h-8 max-h-8 w-180px">
+ <button id="vehicles" class="inline-flex px-2 text-13px font-medium m-0 transition-all ease-in-out leading-5 items-center cursor-pointer border-1px border-borderGray hover:shadow-vBtn active:shadow-vBtn rounded-tl-5px rounded-bl-5px w-152px h-full">
+    <div class="grid justify-center items-center w-full h-full gap-1.5" style="grid-template-columns: 16px 1fr 16px;">
+<img src="/images/drone.png" class="justify-self-end" alt="">
+<span class="font-medium text-left grow"><%=vehicle.name%></span>
+<svg class="justify-self-start shrink-0" style="color:rgb(136, 147, 151);" height="14" width="14" role="presentation" aria-hidden="true" alt="" viewBox="0 0 16 16"><path d="M8.67903 10.7962C8.45271 11.0679 8.04729 11.0679 7.82097 10.7962L4.63962 6.97649C4.3213 6.59428 4.5824 6 5.06866 6L11.4313 6C11.9176 6 12.1787 6.59428 11.8604 6.97649L8.67903 10.7962Z" fill="currentColor"></path></svg>
+    </div>
+ </button>
+ <!-- vehicles popup  -->
+<div id="vehiclesPopup" class="hidden popup-transition absolute top-8p left-0 origin-left bg-popupBackground rounded-xl">
+    <div class="pt-6 pb-2 overflow-auto max-h-80 w-60 rounded-xl">
+        <ul class="p-0">
+           <%if(vehicles.length>0){%>
+            <%for(let v of vehicles){%>
+            <li>
+<a href="/travels/<%=v._id%>" class="hover:bg-linkItem active:bg-linkItem vehicle-popup box-border realtive flex flex-row items-center w-full px-5 cursor-pointer min-h-9 justtify-between text-left " >
+    <div class="py-0.5 w-full overflow-hidden" >
+        <div class="inline-flex flex-col content-center items-start w-full text-sandyBrown font-bold text-13px"><%=v.name%></div>
+        <div class="text-13px font-normal leading-4 text-lightGray text-ellipsis overflow-hidden"><%=v.type%></div>
+    </div>
+</a>
+</li>
+<%}%>
+<%}%>
+<li>
+    <div class="h-1px my-2 relative separator bg-separator"></div>
+</li>
+
+
+<li>
+    <!-- View vehicles -->
+    <a href="/" class="hover:bg-linkItem active:bg-linkItem relative flex border-box flex-row items-center px-5 w-full text-left cursor-pointer min-h-9 h-9 text-13px transition-colors ease-in-out text-link">
+        View all  vehicles
+    </a>
+</li>
+        </ul>
+    </div>
+</div>
+<!-- Add vehicles -->
+ <a href="/add-vehicle" class="relative p-0 m-0 inline-flex items-center justify-center w-7 rounded-tr-5px rounded-br-5px h-full transition-all ease-in-out border-t-1px border-b-1px border-r-1px border-t-borderGray border-r-borderGray border-b-borderGray hover:bg-borderGray"><img src="/images/plus.png" alt=""></a>
+
+                </div>
+            </div>
+            <div class="relative flex gap-3 items-center">
+<a href="" class="relative cursor-pointer p-9px rounded-lg text-13px font-normal">Weather forecast</a>
+<!-- profile button -->
+<button id="profile" class="inline-flex items-stretch p-0 m-0 relative cursor-pointer text-13px leading-5 h-30px rounded-15px border-1px border-borderGray hover:shadow-vBtn active:shadow-vBtn">
+    <div class="rounded-5px absolute overflow-hidden ring-0"></div>
+    <div class="grid grid-flow-col content-center items-center w-full h-full relative px-11px gap-1.5">
+        <span class="w-fit max-w-152px">profile</span>
+<svg class="justify-self-left" style="color:rgb(136, 147, 151);" height="16" width="16" role="presentation" aria-hidden="true" alt="" viewBox="0 0 16 16"><path d="M8.67903 10.7962C8.45271 11.0679 8.04729 11.0679 7.82097 10.7962L4.63962 6.97649C4.3213 6.59428 4.5824 6 5.06866 6L11.4313 6C11.9176 6 12.1787 6.59428 11.8604 6.97649L8.67903 10.7962Z" fill="currentColor"></path></svg>
+    </div>
+</button>
+<!-- profile popup -->
+<%-include("../includes/profile.ejs")%>
+            </div>
+        </nav>
+    </div>
+    <!-- side nav -->
+    <div class="sidenav border-r-2 border-r-platinum bg-sideNavBg">
+        <div class="pb-6 relative min-h-full h-full w-184px ">
+            <nav class="relative flex flex-col">
+               <div class="relative flex items-center justify-between my-0 pt-8 pb-2 px-4 text-sandyBrown ">
+                        <div class="inline-flex items-center gap-2">
+                            <span class="inline-flex"><img src="/images/drone.png" alt=""></span>
+                            <div class="m-0 text-sm font-bold leading-5 tracking-widester uppercase">Vehicle Panel</div>
+                        </div>
+                    </div>
+                    <ul class="m-0 p-0">
+                            <li class="w-full">
+                                <a href="/details/<%=vehicle._id%>" class=" m-0 cursor-pointer relative inline-block w-full min-h-8 h-8 px-4 text-left capitalize text-13px leading-5 hover:bg-hoverSideColor hover:text-sideNavLink flex items-center">Details</a>
+                            </li>
+                             <li class="w-full">
+                                <a href="/travels/<%=vehicle._id%>" class="vehicle-item font-bold relative m-0 cursor-pointer inline-block w-full min-h-8 h-8 px-4 text-left capitalize text-13px leading-5 bg-lightSandyBrown text-sideNavLink flex items-center">Travels</a>
+                            </li>
+                             <li class="w-full">
+                                <a href="/edit-vehicle/<%=vehicle._id%>" class="m-0 cursor-pointer relative  inline-block w-full min-h-8 h-8 px-4 text-left capitalize text-13px leading-5 hover:bg-hoverSideColor hover:text-sideNavLink flex items-center">Edit</a>
+                            </li>
+                             
+                        </ul>
+            </nav>
+        
+         </div>
+    </div>
+<div class="body">
+    <div>
+        <div>
+            <div class="bp-2.5 mb-15px border-b-3px border-b-hoverSideColor block">
+                <h1 class="border-0 pt-0 m-0 flex flex-row justify-start">
+                    <span class="text-sandyBrown text-3xl font-normal text-ellipsis whitespace-nowrap overflow-hidden flex items-center">Travels</span>
+                    <span class="ml-auto">
+                        <div class="flex">
+                            <a href="/create-travel/<%=vehicle._id%>" class="my-2.5 border-1px border-sandyBrown text-white bg-sandyBrown rounded-6px text-13px h-9 inline-block leading-9 px-3 hover:shadow-addBtn">
+                                Add New Travel 
+                            </a>
+                        </div>
+                    </span>
+                </h1>
+            </div>
+            <div>
+                <table class="m-0 text-13px w-full max-w-full h-full">
+                    <thead>
+                        <tr>
+                            <th scope="col" class="travel-table-heading text-left text-13px leading-5 font-bold text-[#1c2d38] py-1 px-5px border-b-2 border-b-[#e8edeb]">Name</th>
+                            <th scope="col" class="travel-table-heading text-left text-13px leading-5 font-bold text-[#1c2d38] py-1 px-5px border-b-2 border-b-[#e8edeb]">Destination</th>
+                            <th scope="col" class=" text-13px leading-5 text-left font-bold text-[#1c2d38] py-1 px-5px border-b-2 border-b-[#e8edeb]">Date</th>
+                            <th scope="col" class="travel-table-heading text-left text-13px leading-5 font-bold text-[#1c2d38] py-1 px-5px border-b-2 border-b-[#e8edeb]">Duration</th>
+                            <th scope="col" class="travel-table-heading text-left text-13px leading-5 font-bold text-[#1c2d38] py-1 px-5px border-b-2 border-b-[#e8edeb]">Distance</th>
+                            <th scope="col" class="travel-table-heading text-left text-13px leading-5 font-bold text-[#1c2d38] py-1 px-5px border-b-2 border-b-[#e8edeb]">Status</th>
+                            <th scope="col" class="travel-table-heading text-left text-13px leading-5 font-bold text-[#1c2d38] py-1 px-5px border-b-2 border-b-[#e8edeb]">Memory Used</th>
+                            <th scope="col" class=" text-13px leading-5 text-left font-bold text-[#1c2d38] py-1 px-5px border-b-2 border-b-[#e8edeb]">Actions</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="py-2.5 pr-5 pl-5px border-t-1px border-t-[#f4f6f6]" colspan="1">Beirut</td>
+                            <td class="py-2.5 pr-5 pl-5px border-t-1px border-t-[#f4f6f6]" colspan="1">Al-Jnah</td>
+                            <td class="py-2.5 pr-5 pl-5px border-t-1px border-t-[#f4f6f6]" colspan="1">12/6/2023</td>
+                            <td class="py-2.5 pr-5 pl-5px border-t-1px border-t-[#f4f6f6]" colspan="1">TBA</td>
+                            <td class="py-2.5 pr-5 pl-5px border-t-1px border-t-[#f4f6f6]" colspan="1">TBA</td>
+                            <td class="py-2.5 pr-5 pl-5px border-t-1px border-t-[#f4f6f6]" colspan="1">TBA</td>
+                            <td class="py-2.5 pr-5 pl-5px border-t-1px border-t-[#f4f6f6]" colspan="1">TBA</td>
+                            <td class="py-2.5 pr-5 pl-5px border-t-1px border-t-[#f4f6f6]" colspan="1">
+                                 <button class="mr-0.5 bg-hoverSideColor border-1px border-lightGray text-gray action-btn">
+                                        <div class="grid grid-flow-col justify-center items-center h-full w-full relative px-2 gap-1.5">
+                                        <a href=""><img src="/images/edit.png" alt=""></a>
+
+                                        </div>
+                                    </button>
+                                <span class="relative">
+                                    <button class="mr-0.5 bg-hoverSideColor border-1px border-lightGray text-gray action-btn">
+                                        <div class="grid grid-flow-col justify-center items-center h-full w-full relative px-2 gap-1.5">
+                                        <a href=""><img src="/images/delete.png" alt=""></a>
+
+                                        </div>
+                                    </button>
+                                </span>
+                                <span class="relative">
+                                    <button title="View Data" class="mr-0.5 bg-hoverSideColor border-1px border-lightGray text-gray action-btn">
+                                        <div class="grid grid-flow-col justify-center items-center h-full w-full relative px-2 gap-1.5">
+                                        <a href=""><img src="/images/eye.png" alt=""></a>
+
+                                        </div>
+                                    </button>
+                                </span>
+                            </td>
+
+                        </tr>
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+   <script src="/js/script.js"></script> 
+
+    <%-include("../includes/end.ejs")%>

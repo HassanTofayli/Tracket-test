@@ -1,0 +1,96 @@
+<%-include("../includes/head.ejs")%>
+
+</head>
+<body class="p-0 m-0 h-full">
+<!-- The main container -->
+<div class="flex flex-row w-full min-h-full font-sans ">
+<div class="w-96 min-h-full bg-white ">
+<form action="/signup" class="my-12 mx-10 flex flex-col" method="post" novalidate>
+    <div class="flex content-start items-center flex-wrap">
+        <img src="/images/pin-mark.png" class="w-10" alt="">
+        <h1 class="font-medium text-xl text-darkBrown">Tracket</h1>
+    </div>
+    <h1 class="font-medium text-2xl mt-8 mb-4 text-darkBrown">Create your account</h1>
+    <p class="font-bold mb-8">Have an account? <a href="/login" class="text-blue-500 font-bold underline">Log in</a></p>
+    <div class="flex flex-col mb-8">
+        <div class="flex">
+                <!-- First Name -->
+                <div class="mr-5 w-1/2 ">
+            <label for="" class="block mt-15px mb-5px max-w-full ">
+                <div class="flex flex-col text-13px leading-5">
+                    <div class="text-xs text-mediumGray font-bold">First Name</div>
+                    <div class="relative flex items-center z-0 ">
+                        <input type="text" class="w-full mt-5px border-1px border-bluishGray h-9 text-sm rounded-6px pl-3"name="firstName" value="<%=oldInputs.firstName%>">
+                       
+                    </div>
+                    <p class="text-sm mt-1 text-[#D8000C]">
+                     <%if(validationErrors.find(e=>e.param==='firstName')){%>
+                <%let i=validationErrors.findIndex(e=>e.param==='firstName')%>
+                <%=validationErrors[i].msg %>
+            <%}%>
+            </p>
+                </div>
+            </label>
+
+                </div>
+                <!-- Last Name -->
+                <div class=" w-1/2 ">
+            <label for="" class="block mt-15px mb-5px max-w-full ">
+                <div class="flex flex-col text-13px leading-5">
+                    <div class="text-xs text-mediumGray font-bold">Last Name</div>
+                    <div class="relative flex items-center z-0 ">
+                        <input type="text" class=" w-full mt-5px border-1px border-bluishGray h-9 text-sm rounded-6px pl-3 " name="lastName" value="<%=oldInputs.lastName%>">
+                       
+                    </div>
+                     <p class="text-sm mt-1 text-[#D8000C]">
+                        <%if(validationErrors.find(e=>e.param==='lastName')){%>
+                <%let i=validationErrors.findIndex(e=>e.param==='lastName')%>
+                <%=validationErrors[i].msg %>
+            <%}%>
+            </p>
+                </div>
+            </label>
+
+                </div>
+            </div>
+        <label class="text-xs text-mediumGray font-bold" for="">Email address</label>
+        <input type="text" class="w-300px mt-5px border-1px border-bluishGray h-9 text-sm rounded-6px pl-3 <%=validationErrors.find(e=>e.param==='email') ? 'input-error-border':''%>" name="email" value="<%=oldInputs.email%>">
+        <p class="text-sm mt-1 text-[#D8000C]"><%if(validationErrors.find(e=>e.param==='email')){%>
+                <%let i=validationErrors.findIndex(e=>e.param==='email')%>
+                <%=validationErrors[i].msg %>
+            <%}%>
+                </p>
+    </div>
+     <div class="flex flex-col mb-8">
+        <label class="text-xs text-mediumGray font-bold" for="">Password</label>
+        <input type="password" class="w-300px mt-5px border-1px border-bluishGray h-9 text-sm rounded-6px pl-3 <%=validationErrors.find(e=>e.param==='password') ? 'input-error-border':''%>" name="password" value="<%=oldInputs.password%>">
+        <p class="text-sm mt-1 text-[#D8000C]"><%if(validationErrors.find(e=>e.param==='password')){%>
+                <%let i=validationErrors.findIndex(e=>e.param==='password')%>
+                <%=validationErrors[i].msg %>
+            <%}%>
+                </p>
+    </div>
+
+    <div class="flex flex-col mb-2">
+        <label class="text-xs text-mediumGray font-bold" for="">Confirm Password</label>
+        <input type="password" class="w-300px mt-5px border-1px border-bluishGray h-9 text-sm rounded-6px pl-3 <%=validationErrors.find(e=>e.param==='confirmPassword') ? 'input-error-border':''%>" name="confirmPassword" value="<%=oldInputs.confirmPassword%>">
+            <p class="text-sm mt-1 text-[#D8000C]"><%if(validationErrors.find(e=>e.param==='confirmPassword')){%>
+                <%let i=validationErrors.findIndex(e=>e.param==='confirmPassword')%>
+                <%=validationErrors[i].msg %>
+            <%}%>
+                </p>
+    </div>
+    
+    <div class="mt-6 flex justify-end">
+        <button class="w-90px h-8 font-15px bg-sandyBrown hover:bg-popupBackground font-mediumbold text-white rounded-5px">Sign up</button>
+    </div>
+</form>
+</div>
+<!-- 3d photo -->
+<div class="w-full min-h-full">
+    <img class="bg-cover" src="/images/alter2.png" alt="">
+</div>
+</div>
+<%-include("../includes/end.ejs")%>
+
+

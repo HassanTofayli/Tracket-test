@@ -1,0 +1,124 @@
+<%-include("../includes/head.ejs")%>
+
+</head>
+<body class="p-0 m-0 h-full text-black">
+<!-- Main Layout -->
+<div class="grid template m-0 bg-white max-w-full w-screen">
+    <!-- Header -->
+    <%-include("../includes/navBarWOV.ejs")%>
+<div class="body">
+    <div>
+        <div>
+            <div class="bp-2.5 mb-15px border-b-3px border-b-hoverSideColor block">
+                <h1 class="border-0 pt-0 m-0 flex flex-row justify-start">
+                    <span class="text-sandyBrown text-3xl font-normal text-ellipsis whitespace-nowrap overflow-hidden flex items-center">Vehicles</span>
+                    <span class="ml-auto">
+                        <div class="flex">
+                            <a href="/add-vehicle" class="my-2.5 border-1px border-sandyBrown text-white bg-sandyBrown rounded-6px text-13px h-9 inline-block leading-9 px-3 hover:shadow-addBtn">
+                                Add New Vehicle 
+                            </a>
+                        </div>
+                    </span>
+                </h1>
+            </div>
+            <div class="relative text-13px leading-5  shadow-vehiclesTable text-profileDarkColor rounded-3xl p-6 border-1px border-hoverSideColor">
+                <div>
+                    <div class="relative max-w-full">
+                        <div class="absolute top-0 bottom-0 left-0 w-4 overflow-hidden pointer-events-none vehiclesTable"></div>
+                        <div class="absolute top-0 bottom-0 right-0 w-4 overflow-hidden pointer-events-none vehiclesTable"></div>
+                        <div class="overflow-x-auto">
+                            <table class="relative border-collapse border-box w-full z-0">
+                                <thead>
+                                    <tr>
+                                        <th class="py-2.5 px-2 border-box min-w-10 w-10 text-left align-baseline text-13px leading-5 border-b-3px border-b-hoverSideColor">
+                                            <div class="flex items-center justify-start">
+                                                <span class="pr-1">Vehicle Name</span>
+                                            </div>
+                                        </th>
+                                        <th class="py-2.5 px-2 border-box min-w-10 w-10 text-left align-baseline text-13px leading-5 border-b-3px border-b-hoverSideColor">
+                                            <div class="flex items-center justify-start">
+                                                <span class="pr-1">Type</span>
+                                            </div>
+                                        </th>
+                                        <th class="py-2.5 px-2 border-box min-w-10 w-10 text-left align-baseline text-13px leading-5 border-b-3px border-b-hoverSideColor">
+                                            <div class="flex items-center justify-start">
+                                                <span class="pr-1">Status</span>
+                                            </div>
+
+                                        </th>
+                                        <th class="py-2.5 px-2 border-box min-w-10 w-10 text-left align-baseline text-13px leading-5 border-b-3px border-b-hoverSideColor">
+                                            <div class="flex items-center justify-start">
+                                                <span class="pr-1">Actions</span>
+                                            </div>
+
+                                        </th>
+                                       
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                     <%if(vehicles.length>0){%>
+                <%for(let vehicle of vehicles){%>
+                                    <tr class="relative h-5 z-1">
+                                        <td class="py-2.5 px-2 border-box min-w-10 w-10 text-left align-baseline text-13px leading-5">
+                                            <div class="flex items-center justify-start h-5">
+                                                <span class="flex">
+                                                    <div class="relative">
+                                                        <a href="/details/<%=vehicle._id%>" class="text-link hover:underline"><%=vehicle.name%></a>
+                                                    </div>
+                                                </span>
+                                            </div>
+                                        </td>
+                                        <td class="py-2.5 px-2 border-box min-w-10 w-10 text-left align-baseline text-13px leading-5">
+                                            <div class="flex items-center justify-start h-5">
+                                                <span class="flex"><%=vehicle.type%></span>
+                                            </div>
+                                        </td>
+                                        <td class="py-2.5 px-2 border-box min-w-10 w-10 text-left align-baseline text-13px leading-5">
+                                            <div class="flex items-center justify-start h-5">
+                                                <span class="flex"><%=vehicle.status%></span>
+                                            </div>
+                                        </td>
+                                        <td class="py-2.5 pr-5 pl-5px flex gap-1.5" colspan="1">
+                                 <button class="mr-0.5 bg-hoverSideColor border-1px border-lightGray text-gray action-btn">
+                                        <div class="grid grid-flow-col justify-center items-center h-full w-full relative px-2 gap-1.5">
+                                        <a href="/edit-vehicle/<%=vehicle._id%>"><img src="/images/edit.png" alt=""></a>
+
+                                        </div>
+                                    </button>
+                                <span class="relative">
+                                    <form action="/delete-vehicle" method="post">
+                                        <input type="hidden" name="vehicleId" value="<%=vehicle._id%>">
+                                    <button class="mr-0.5 bg-hoverSideColor border-1px border-lightGray text-gray action-btn">
+                                        <div class="grid grid-flow-col justify-center items-center h-full w-full relative px-2 gap-1.5">
+                                        <img src="/images/delete.png" alt="">
+
+                                        </div>
+                                    </button>
+                                    </form>
+                                </span>
+                            </td>
+
+                                    </tr>
+                                    <%}%>
+                                    <%}else{%>
+                                        <tr>
+                                            <td class="py-2.5 px-2 border-box min-w-10 w-10 text-left align-baseline"><div class="font-bold text-2xl text-popupBackground leading-5">Nothing Here!</div></td>
+                                        </tr>
+                                    <%}%>
+    
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+   <script src="/js/profile-script.js"></script> 
+
+    <%-include("../includes/end.ejs")%>
+

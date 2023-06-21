@@ -1,0 +1,23 @@
+<!-- Header -->
+    <div class="fixed right-0 top-0 left-0 h-60px z-101 shadow-nav bg-white">
+        <nav class="relative flex items-center justify-between w-full px-4 text-sm leading-4 h-full border-b-1px border-b-platinum">
+            <div class=" realtive flex items-center gap-3.5">
+                <div class="flex items-center mr-1">
+                    <img src="/images/pin-mark.png" alt="" class="w-10">
+                     <h1 class="font-medium text-xl text-black">Tracket</h1>
+                </div>
+            </div>
+            <div class="relative flex gap-3 items-center">
+<!-- profile button -->
+<button id="profile" class="inline-flex items-stretch p-0 m-0 relative cursor-pointer text-13px leading-5 h-30px rounded-15px border-1px border-borderGray hover:shadow-vBtn active:shadow-vBtn">
+    <div class="rounded-5px absolute overflow-hidden ring-0"></div>
+    <div class="grid grid-flow-col content-center items-center w-full h-full relative px-11px gap-1.5">
+        <span class="w-fit max-w-152px">profile</span>
+<svg class="justify-self-left" style="color:rgb(136, 147, 151);" height="16" width="16" role="presentation" aria-hidden="true" alt="" viewBox="0 0 16 16"><path d="M8.67903 10.7962C8.45271 11.0679 8.04729 11.0679 7.82097 10.7962L4.63962 6.97649C4.3213 6.59428 4.5824 6 5.06866 6L11.4313 6C11.9176 6 12.1787 6.59428 11.8604 6.97649L8.67903 10.7962Z" fill="currentColor"></path></svg>
+    </div>
+</button>
+<!-- profile popup -->
+<%-include("../includes/profile.ejs")%>
+            </div>
+        </nav>
+    </div>

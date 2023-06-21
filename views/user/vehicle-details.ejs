@@ -1,0 +1,245 @@
+<%-include("../includes/head.ejs")%>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<body class="p-0 m-0 h-full text-black">
+  
+<!-- Main Layout -->
+<div class="grid template m-0 bg-white max-w-full w-screen">
+    <!-- Header -->
+    <div class="fixed right-0 top-0 left-0 h-60px z-101 shadow-nav">
+        <nav class="relative flex items-center justify-between w-full px-4 text-sm leading-4 h-full border-b-1px border-b-platinum">
+            <div class=" realtive flex items-center gap-3.5">
+                <div class="flex items-center mr-1">
+                    <img src="/images/pin-mark.png" alt="" class="w-10">
+                     <h1 class="font-medium text-xl text-black">Tracket</h1>
+                </div>
+                <!-- vehicles menu -->
+                <div class="relative flex items-center justify-center h-8 max-h-8 w-180px">
+ <button id="vehicles" class="inline-flex px-2 text-13px font-medium m-0 transition-all ease-in-out leading-5 items-center cursor-pointer border-1px border-borderGray hover:shadow-vBtn active:shadow-vBtn rounded-tl-5px rounded-bl-5px w-152px h-full">
+    <div class="grid justify-center items-center w-full h-full gap-1.5" style="grid-template-columns: 16px 1fr 16px;">
+<img src="/images/drone.png" class="justify-self-end" alt="">
+<span class="font-medium text-left grow"><%=vehicle.name%></span>
+<svg class="justify-self-start shrink-0" style="color:rgb(136, 147, 151);" height="14" width="14" role="presentation" aria-hidden="true" alt="" viewBox="0 0 16 16"><path d="M8.67903 10.7962C8.45271 11.0679 8.04729 11.0679 7.82097 10.7962L4.63962 6.97649C4.3213 6.59428 4.5824 6 5.06866 6L11.4313 6C11.9176 6 12.1787 6.59428 11.8604 6.97649L8.67903 10.7962Z" fill="currentColor"></path></svg>
+    </div>
+ </button>
+ <!-- vehicles popup  -->
+<div id="vehiclesPopup" class="hidden popup-transition absolute top-8p left-0 origin-left bg-popupBackground rounded-xl">
+    <div class="pt-6 pb-2 overflow-auto max-h-80 w-60 rounded-xl">
+        <ul class="p-0">
+           <%if(vehicles.length>0){%>
+            <%for(let v of vehicles){%>
+            <li>
+<a href="/details/<%=v._id%>" class="hover:bg-linkItem active:bg-linkItem <%vehicles.find(e=>e._id===vehicle._id)?'vehicle-popup':''%> box-border relative flex flex-row items-center w-full px-5 cursor-pointer min-h-9 justtify-between text-left " >
+    <div class="py-0.5 w-full overflow-hidden" >
+        <div class="inline-flex flex-col content-center items-start w-full text-sandyBrown font-bold text-13px"><%=v.name%></div>
+        <div class="text-13px font-normal leading-4 text-lightGray text-ellipsis overflow-hidden"><%=v.type%></div>
+    </div>
+</a>
+</li>
+<%}%>
+<%}%>
+
+<li>
+    <div class="h-1px my-2 relative separator bg-separator"></div>
+</li>
+
+
+<li>
+    <!-- View vehicles -->
+    <a href="/" class="hover:bg-linkItem active:bg-linkItem relative flex border-box flex-row items-center px-5 w-full text-left cursor-pointer min-h-9 h-9 text-13px transition-colors ease-in-out text-link">
+        View all  vehicles
+    </a>
+</li>
+        </ul>
+    </div>
+</div>
+<!-- Add vehicles -->
+ <a href="/add-vehicle" class="relative p-0 m-0 inline-flex items-center justify-center w-7 rounded-tr-5px rounded-br-5px h-full transition-all ease-in-out border-t-1px border-b-1px border-r-1px border-t-borderGray border-r-borderGray border-b-borderGray hover:bg-borderGray"><img src="/images/plus.png" alt=""></a>
+
+                </div>
+            </div>
+            <div class="relative flex gap-3 items-center">
+<a href="" class="relative cursor-pointer p-9px rounded-lg text-13px font-normal">Weather forecast</a>
+<!-- profile button -->
+<button id="profile" class="inline-flex items-stretch p-0 m-0 relative cursor-pointer text-13px leading-5 h-30px rounded-15px border-1px border-borderGray hover:shadow-vBtn active:shadow-vBtn">
+    <div class="rounded-5px absolute overflow-hidden ring-0"></div>
+    <div class="grid grid-flow-col content-center items-center w-full h-full relative px-11px gap-1.5">
+        <span class="w-fit max-w-152px">profile</span>
+<svg class="justify-self-left" style="color:rgb(136, 147, 151);" height="16" width="16" role="presentation" aria-hidden="true" alt="" viewBox="0 0 16 16"><path d="M8.67903 10.7962C8.45271 11.0679 8.04729 11.0679 7.82097 10.7962L4.63962 6.97649C4.3213 6.59428 4.5824 6 5.06866 6L11.4313 6C11.9176 6 12.1787 6.59428 11.8604 6.97649L8.67903 10.7962Z" fill="currentColor"></path></svg>
+    </div>
+</button>
+<!-- profile popup -->
+<%-include("../includes/profile.ejs")%>
+            </div>
+        </nav>
+    </div>
+    <!-- side nav -->
+    <div class="sidenav border-r-2 border-r-platinum bg-sideNavBg">
+        <div class="pb-6 relative min-h-full h-full w-184px ">
+            <nav class="relative flex flex-col">
+               <div class="relative flex items-center justify-between my-0 pt-8 pb-2 px-4 text-sandyBrown ">
+                        <div class="inline-flex items-center gap-2">
+                            <span class="inline-flex"><img src="/images/drone.png" alt=""></span>
+                            <div class="m-0 text-sm font-bold leading-5 tracking-widester uppercase">Vehicle Panel</div>
+                        </div>
+                    </div>
+                    <ul class="m-0 p-0">
+                            <li class="w-full">
+                                <a href="/details/<%=vehicle._id%>" class="vehicle-item font-bold relative m-0 cursor-pointer inline-block w-full min-h-8 h-8 px-4 text-left capitalize text-13px leading-5 bg-lightSandyBrown text-sideNavLink flex items-center ">Details</a>
+                            </li>
+                             <li class="w-full">
+                                <a href="/travels/<%=vehicle._id%>" class=" relative m-0 cursor-pointer inline-block w-full min-h-8 h-8 px-4 text-left capitalize text-13px leading-5 hover:bg-hoverSideColor hover:text-sideNavLink flex items-center">Travels</a>
+                            </li>
+                             <li class="w-full">
+                                <a href="/edit-vehicle/<%=vehicle._id%>" class=" relative m-0 cursor-pointer inline-block w-full min-h-8 h-8 px-4 text-left capitalize text-13px leading-5 hover:bg-hoverSideColor hover:text-sideNavLink flex items-center">Edit</a>
+                            </li>
+                             
+                        </ul>
+            </nav>
+        
+         </div>
+    </div>
+<div class="body">
+    <div>
+        <main class="relative pb-0">
+           <div>
+            <div>
+                <header class="mt-0.5 relative flex flex-col justify-end h-auto bg-white">
+                    <h1 class="pt-0 flex flex-row justify-start mr-0 mb-0 mt-0 ml-0 text-inherit ">
+                        <span class="text-3xl font-normal text-sandyBrown text-ellipsis">Vehicle Details</span>
+                    </h1>
+                </header>
+            </div>
+            <div class="pt-5 pb-0 overflow-auto w-full table">
+                <div>
+                    <div>
+                        <div class="rounded-7px mb-6 ">
+                            <div class="flex flex-col rounded-7px bg-white">
+                                <div class="details">
+                                    <div class="details-header">
+                                        <div class="flex gap-x-2">
+                                            <span class="flex items-center">
+                                                <i class="fa fa-circle text-sandyBrown">
+                                                </i>
+                                            </span>
+                                            <div class="col-start-2 self-center text-15px font-bold"><%=vehicle.name%></div>
+                                        </div>
+                                        <div class="flex justify-start gap-x-2">
+                                            <!-- Connect Button -->
+                                            <button class="details-header-button hover:shadow-addBtn">
+                                                <div class="details-header-button2">
+                                                    <span>Connect</span>
+                                                </div>
+                                            </button>
+                                            <!-- Edit Button -->
+                                             <a href="/edit-vehicle/<%=vehicle._id%>">
+                                            <button class="details-header-button hover:shadow-addBtn">
+                                                <div class="details-header-button2">
+                                                    <span>Edit Vehicle</span>
+                                                </div>
+                                            </button>
+                                            </a>
+                                        </div>
+                                        <!-- Status -->
+                                        <div class="flex gap-x-2">
+                                            <div class="inline-flex items-center font-bold text-xs leading-4 rounded-5px h-18px p-1.5 uppercase border-1px border-[BEFAE6] bg-lightSandyBrown text-sandyBrown ">Connected</div>
+                                        </div>
+                                    </div>
+                                    <!-- details body, Visualizing data -->
+                                    <div class="visualized-data ">
+                                        <div class="flex gap-x-8 h-full">
+                                            <div class="data-graph">
+                                                <div style="flex:1 1 0%;" class="relative text-13px leading-5 text-[#1C2D38] ">
+                                                    <div class="h-41px mb-[-10px]">
+                                                        <span class="mr-2.5">
+                                                            Memory Size Used
+                                                        </span>
+                                                    </div>
+                                                    <div class="text-11px font-normal mt-2 text-[#5c6c75]">
+                                                        Last 30 days
+                                                    </div>
+                                                    <svg class="generic-chart" width="181" height="73"><g class="nds-sparkline-chart chart-Connections" transform="translate(0,18)"><g class="nds-sparkline-chart-axes" fill="none" font-size="10" font-family="sans-serif" text-anchor="start"><path class="domain" d="M181,0.5H0.5V50.5H181"></path><g class="tick" opacity="1" transform="translate(0,50.5)"><line x2="181" class="nds-sparkline-guideline"></line><text x="0" dy="-4" class="nds-sparkline-axis-label"></text></g><g class="tick" opacity="1" transform="translate(0,0.5)"><line x2="181" class="nds-sparkline-guideline-dashed"></line><text x="0" dy="-4" class="nds-sparkline-axis-label">100.0</text></g></g><g class="nds-sparkline-chart-lines"><path class="nds-sparkline-line-new connections" fill="none" stroke="#F97216" stroke-width="1.5" stroke-linecap="round" d="M0,25L2.549,25L5.099,25L7.648,25L10.197,25L12.746,25L15.296,25L17.845,25L20.394,25L22.944,25L25.493,25L28.042,25L30.592,25L33.141,25L35.69,25L38.239,25L40.789,25L43.338,25L45.887,25L48.437,25L50.986,25L53.535,25L56.085,25L58.634,25L61.183,25L63.732,25L66.282,25L68.831,25L71.38,25L73.93,25L76.479,25L79.028,25L81.577,25L84.127,25L86.676,25L89.225,25L91.775,25L94.324,25L96.873,25L99.423,25L101.972,25L104.521,25L107.07,25L109.62,25L112.169,25L114.718,25L117.268,25L119.817,25L122.366,25L124.915,25L127.465,25L130.014,25L132.563,25L135.113,25L137.662,25L140.211,25L142.761,25L145.31,25L147.859,25L150.408,25L152.958,25L155.507,25L158.056,25L160.606,25L163.155,25L165.704,25L168.254,25L170.803,25L173.352,25L175.901,25L178.451,25L181,25"></path><path class="nds-sparkline-area-new" fill="#FFFFFF" d="M0,25L2.549,25L5.099,25L7.648,25L10.197,25L12.746,25L15.296,25L17.845,25L20.394,25L22.944,25L25.493,25L28.042,25L30.592,25L33.141,25L35.69,25L38.239,25L40.789,25L43.338,25L45.887,25L48.437,25L50.986,25L53.535,25L56.085,25L58.634,25L61.183,25L63.732,25L66.282,25L68.831,25L71.38,25L73.93,25L76.479,25L79.028,25L81.577,25L84.127,25L86.676,25L89.225,25L91.775,25L94.324,25L96.873,25L99.423,25L101.972,25L104.521,25L107.07,25L109.62,25L112.169,25L114.718,25L117.268,25L119.817,25L122.366,25L124.915,25L127.465,25L130.014,25L132.563,25L135.113,25L137.662,25L140.211,25L142.761,25L145.31,25L147.859,25L150.408,25L152.958,25L155.507,25L158.056,25L160.606,25L163.155,25L165.704,25L168.254,25L170.803,25L173.352,25L175.901,25L178.451,25L181,25L181,50L178.451,50L175.901,50L173.352,50L170.803,50L168.254,50L165.704,50L163.155,50L160.606,50L158.056,50L155.507,50L152.958,50L150.408,50L147.859,50L145.31,50L142.761,50L140.211,50L137.662,50L135.113,50L132.563,50L130.014,50L127.465,50L124.915,50L122.366,50L119.817,50L117.268,50L114.718,50L112.169,50L109.62,50L107.07,50L104.521,50L101.972,50L99.423,50L96.873,50L94.324,50L91.775,50L89.225,50L86.676,50L84.127,50L81.577,50L79.028,50L76.479,50L73.93,50L71.38,50L68.831,50L66.282,50L63.732,50L61.183,50L58.634,50L56.085,50L53.535,50L50.986,50L48.437,50L45.887,50L43.338,50L40.789,50L38.239,50L35.69,50L33.141,50L30.592,50L28.042,50L25.493,50L22.944,50L20.394,50L17.845,50L15.296,50L12.746,50L10.197,50L7.648,50L5.099,50L2.549,50L0,50Z"></path></g><g class="nds-sparkline-chart-vertical-line" data-testid="vertical-line-Connections"><line class="nds-sparkline-vertical-line" x1="22.943661971830984" y1="0" x2="22.943661971830984" y2="50" style="stroke: rgb(0, 0, 0); display: none;"></line></g><g class="nds-sparkline-chart-overlay"><rect class="mouse-overlay" width="181" height="50" style="fill: none; pointer-events: all;"></rect></g></g></svg>
+                                                </div>
+                                            </div>
+                                            <!--  -->
+                                            <div class="data-graph">
+                                                <div style="flex:1 1 0%;" class="relative text-13px leading-5 text-[#1C2D38] ">
+                                                    <div class="h-41px mb-[-10px]">
+                                                        <span class="mr-2.5">
+                                                            Memory Size Used
+                                                        </span>
+                                                    </div>
+                                                    <div class="text-11px font-normal mt-2 text-[#5c6c75]">
+                                                        Last 30 days
+                                                    </div>
+                                                    <svg class="generic-chart" width="181" height="73"><g class="nds-sparkline-chart chart-Connections" transform="translate(0,18)"><g class="nds-sparkline-chart-axes" fill="none" font-size="10" font-family="sans-serif" text-anchor="start"><path class="domain" d="M181,0.5H0.5V50.5H181"></path><g class="tick" opacity="1" transform="translate(0,50.5)"><line x2="181" class="nds-sparkline-guideline"></line><text x="0" dy="-4" class="nds-sparkline-axis-label"></text></g><g class="tick" opacity="1" transform="translate(0,0.5)"><line x2="181" class="nds-sparkline-guideline-dashed"></line><text x="0" dy="-4" class="nds-sparkline-axis-label">100.0</text></g></g><g class="nds-sparkline-chart-lines"><path class="nds-sparkline-line-new connections" fill="none" stroke="#F97216" stroke-width="1.5" stroke-linecap="round" d="M0,25L2.549,25L5.099,25L7.648,25L10.197,25L12.746,25L15.296,25L17.845,25L20.394,25L22.944,25L25.493,25L28.042,25L30.592,25L33.141,25L35.69,25L38.239,25L40.789,25L43.338,25L45.887,25L48.437,25L50.986,25L53.535,25L56.085,25L58.634,25L61.183,25L63.732,25L66.282,25L68.831,25L71.38,25L73.93,25L76.479,25L79.028,25L81.577,25L84.127,25L86.676,25L89.225,25L91.775,25L94.324,25L96.873,25L99.423,25L101.972,25L104.521,25L107.07,25L109.62,25L112.169,25L114.718,25L117.268,25L119.817,25L122.366,25L124.915,25L127.465,25L130.014,25L132.563,25L135.113,25L137.662,25L140.211,25L142.761,25L145.31,25L147.859,25L150.408,25L152.958,25L155.507,25L158.056,25L160.606,25L163.155,25L165.704,25L168.254,25L170.803,25L173.352,25L175.901,25L178.451,25L181,25"></path><path class="nds-sparkline-area-new" fill="#FFFFFF" d="M0,25L2.549,25L5.099,25L7.648,25L10.197,25L12.746,25L15.296,25L17.845,25L20.394,25L22.944,25L25.493,25L28.042,25L30.592,25L33.141,25L35.69,25L38.239,25L40.789,25L43.338,25L45.887,25L48.437,25L50.986,25L53.535,25L56.085,25L58.634,25L61.183,25L63.732,25L66.282,25L68.831,25L71.38,25L73.93,25L76.479,25L79.028,25L81.577,25L84.127,25L86.676,25L89.225,25L91.775,25L94.324,25L96.873,25L99.423,25L101.972,25L104.521,25L107.07,25L109.62,25L112.169,25L114.718,25L117.268,25L119.817,25L122.366,25L124.915,25L127.465,25L130.014,25L132.563,25L135.113,25L137.662,25L140.211,25L142.761,25L145.31,25L147.859,25L150.408,25L152.958,25L155.507,25L158.056,25L160.606,25L163.155,25L165.704,25L168.254,25L170.803,25L173.352,25L175.901,25L178.451,25L181,25L181,50L178.451,50L175.901,50L173.352,50L170.803,50L168.254,50L165.704,50L163.155,50L160.606,50L158.056,50L155.507,50L152.958,50L150.408,50L147.859,50L145.31,50L142.761,50L140.211,50L137.662,50L135.113,50L132.563,50L130.014,50L127.465,50L124.915,50L122.366,50L119.817,50L117.268,50L114.718,50L112.169,50L109.62,50L107.07,50L104.521,50L101.972,50L99.423,50L96.873,50L94.324,50L91.775,50L89.225,50L86.676,50L84.127,50L81.577,50L79.028,50L76.479,50L73.93,50L71.38,50L68.831,50L66.282,50L63.732,50L61.183,50L58.634,50L56.085,50L53.535,50L50.986,50L48.437,50L45.887,50L43.338,50L40.789,50L38.239,50L35.69,50L33.141,50L30.592,50L28.042,50L25.493,50L22.944,50L20.394,50L17.845,50L15.296,50L12.746,50L10.197,50L7.648,50L5.099,50L2.549,50L0,50Z"></path></g><g class="nds-sparkline-chart-vertical-line" data-testid="vertical-line-Connections"><line class="nds-sparkline-vertical-line" x1="22.943661971830984" y1="0" x2="22.943661971830984" y2="50" style="stroke: rgb(0, 0, 0); display: none;"></line></g><g class="nds-sparkline-chart-overlay"><rect class="mouse-overlay" width="181" height="50" style="fill: none; pointer-events: all;"></rect></g></g></svg>
+
+                                                </div>
+                                            </div>
+                                            <!--  -->
+                                            <div class="data-graph">
+                                                <div style="flex:1 1 0%;" class="relative text-13px leading-5 text-[#1C2D38] ">
+                                                    <div class="h-41px mb-[-10px]">
+                                                        <span class="mr-2.5">
+                                                            Memory Size Used
+                                                        </span>
+                                                    </div>
+                                                    <div class="text-11px font-normal mt-2 text-[#5c6c75]">
+                                                        Last 30 days
+                                                    </div>
+                                                    <svg class="generic-chart" width="181" height="73"><g class="nds-sparkline-chart chart-Connections" transform="translate(0,18)"><g class="nds-sparkline-chart-axes" fill="none" font-size="10" font-family="sans-serif" text-anchor="start"><path class="domain" d="M181,0.5H0.5V50.5H181"></path><g class="tick" opacity="1" transform="translate(0,50.5)"><line x2="181" class="nds-sparkline-guideline"></line><text x="0" dy="-4" class="nds-sparkline-axis-label"></text></g><g class="tick" opacity="1" transform="translate(0,0.5)"><line x2="181" class="nds-sparkline-guideline-dashed"></line><text x="0" dy="-4" class="nds-sparkline-axis-label">100.0</text></g></g><g class="nds-sparkline-chart-lines"><path class="nds-sparkline-line-new connections" fill="none" stroke="#F97216" stroke-width="1.5" stroke-linecap="round" d="M0,25L2.549,25L5.099,25L7.648,25L10.197,25L12.746,25L15.296,25L17.845,25L20.394,25L22.944,25L25.493,25L28.042,25L30.592,25L33.141,25L35.69,25L38.239,25L40.789,25L43.338,25L45.887,25L48.437,25L50.986,25L53.535,25L56.085,25L58.634,25L61.183,25L63.732,25L66.282,25L68.831,25L71.38,25L73.93,25L76.479,25L79.028,25L81.577,25L84.127,25L86.676,25L89.225,25L91.775,25L94.324,25L96.873,25L99.423,25L101.972,25L104.521,25L107.07,25L109.62,25L112.169,25L114.718,25L117.268,25L119.817,25L122.366,25L124.915,25L127.465,25L130.014,25L132.563,25L135.113,25L137.662,25L140.211,25L142.761,25L145.31,25L147.859,25L150.408,25L152.958,25L155.507,25L158.056,25L160.606,25L163.155,25L165.704,25L168.254,25L170.803,25L173.352,25L175.901,25L178.451,25L181,25"></path><path class="nds-sparkline-area-new" fill="#FFFFFF" d="M0,25L2.549,25L5.099,25L7.648,25L10.197,25L12.746,25L15.296,25L17.845,25L20.394,25L22.944,25L25.493,25L28.042,25L30.592,25L33.141,25L35.69,25L38.239,25L40.789,25L43.338,25L45.887,25L48.437,25L50.986,25L53.535,25L56.085,25L58.634,25L61.183,25L63.732,25L66.282,25L68.831,25L71.38,25L73.93,25L76.479,25L79.028,25L81.577,25L84.127,25L86.676,25L89.225,25L91.775,25L94.324,25L96.873,25L99.423,25L101.972,25L104.521,25L107.07,25L109.62,25L112.169,25L114.718,25L117.268,25L119.817,25L122.366,25L124.915,25L127.465,25L130.014,25L132.563,25L135.113,25L137.662,25L140.211,25L142.761,25L145.31,25L147.859,25L150.408,25L152.958,25L155.507,25L158.056,25L160.606,25L163.155,25L165.704,25L168.254,25L170.803,25L173.352,25L175.901,25L178.451,25L181,25L181,50L178.451,50L175.901,50L173.352,50L170.803,50L168.254,50L165.704,50L163.155,50L160.606,50L158.056,50L155.507,50L152.958,50L150.408,50L147.859,50L145.31,50L142.761,50L140.211,50L137.662,50L135.113,50L132.563,50L130.014,50L127.465,50L124.915,50L122.366,50L119.817,50L117.268,50L114.718,50L112.169,50L109.62,50L107.07,50L104.521,50L101.972,50L99.423,50L96.873,50L94.324,50L91.775,50L89.225,50L86.676,50L84.127,50L81.577,50L79.028,50L76.479,50L73.93,50L71.38,50L68.831,50L66.282,50L63.732,50L61.183,50L58.634,50L56.085,50L53.535,50L50.986,50L48.437,50L45.887,50L43.338,50L40.789,50L38.239,50L35.69,50L33.141,50L30.592,50L28.042,50L25.493,50L22.944,50L20.394,50L17.845,50L15.296,50L12.746,50L10.197,50L7.648,50L5.099,50L2.549,50L0,50Z"></path></g><g class="nds-sparkline-chart-vertical-line" data-testid="vertical-line-Connections"><line class="nds-sparkline-vertical-line" x1="22.943661971830984" y1="0" x2="22.943661971830984" y2="50" style="stroke: rgb(0, 0, 0); display: none;"></line></g><g class="nds-sparkline-chart-overlay"><rect class="mouse-overlay" width="181" height="50" style="fill: none; pointer-events: all;"></rect></g></g></svg>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Visualizing tip -->
+                                    <div class="visualizing-tip">
+                                        <div class="tip-template">
+                                            <div class="row-start-2 col-start-1 col-span-3 grid font-bold grid-cols-tipTitle">
+                                            <div class="">
+                                                Visualizing your data
+                                            </div>
+                                            </div>
+                                            <div class="row-start-3 col-start-1 col-span-2 py-2.5">
+                                                These charts visualize the data form your interaction with the vehicle in the last 30 days
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Details -->
+                                    <div class="details-table">
+                                        <div class="grid gap-y-1 gap-x-9 ">
+                                            <div class="block text-detailsGray text-10px font-bold uppercase col-start-1 row-start-1">Name</div>
+                                            <div class="block text-detailsBlack text-13px font-normal col-start-1 row-start-2"><%=vehicle.name%></div>
+                                             <div class="block text-detailsGray text-10px font-bold uppercase col-start-2 row-start-1">Serial Number</div>
+                                            <div class="block text-detailsBlack text-13px font-normal col-start-2 row-start-2"><%=vehicle.serialNumber%></div>
+                                             <div class="block text-detailsGray text-10px font-bold uppercase col-start-3 row-start-1">Type</div>
+                                            <div class="block text-detailsBlack text-13px font-normal col-start-3 row-start-2"><%=vehicle.type%></div>
+                                             <div class="block text-detailsGray text-10px font-bold uppercase col-start-4 row-start-1">Memory Size </div>
+                                            <div class="block text-detailsBlack text-13px font-normal col-start-4 row-start-2"><%=vehicle.memorySize%> MB</div>
+                                             <div class="block text-detailsGray text-10px font-bold uppercase col-start-5 row-start-1">Battery Capacity</div>
+                                            <div class="block text-detailsBlack text-13px font-normal col-start-5 row-start-2"><%=vehicle.batteryCapacity%> mA</div>
+                                             <div class="block text-detailsGray text-10px font-bold uppercase col-start-6 row-start-1">Version</div>
+                                            <div class="block text-detailsBlack text-13px font-normal col-start-6 row-start-2"><%=vehicle.version%></div>
+                                             <div class="block text-detailsGray text-10px font-bold uppercase col-start-7 row-start-1">Sensors</div>
+                                            <div class="block text-detailsBlack text-13px font-normal col-start-7 row-start-2"><%=vehicle.sensors%></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+           </div> 
+        </main>
+    </div>
+</div>
+
+</div>
+   <script src="/js/script.js"></script> 
+   <script src="https://d3js.org/d3.v7.min.js"></script>
+
+    <%-include("../includes/end.ejs")%>

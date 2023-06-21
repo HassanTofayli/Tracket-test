@@ -1,0 +1,46 @@
+<div id="profilePopup" class="hidden absolute rounded-xl top-8p right-0 popup-transition bg-[#001e2b]">
+    <div>
+        <div class="rounded-xl max-h-[572.5px] w-300px p-0 overflow-auto text-13px font-medium">
+            <ul class="overflow-auto mb-2.5 p-0 ">
+               <li class="text-white py-6 px-2.5 flex flex-col items-center max-w-full mb-px bg-profileDarkColor border-box">
+                <div class="rounded-full flex w-42px h-42px items-center content-center mb-4 bg-popupBackground">
+                    <img src="/images/pin-mark.png" class=" w-auto overflow-hidden" alt="">
+                </div>
+                <h3 class="text-base font-semibold leading-7 text-ellipsis m-0 max-w-full"><%=user.firstName%> <%=user.lastName%></h3>
+                <p class="font-xs leading-4 mb-4 max-w-full text-ellipsis"><%=user.email%></p>
+                <!-- manage account -->
+                <a href="/profile-info" class="hover:bg-pBtn hover:border-[rgb(136, 147, 151)] hover:shadow-pBtn p-0 m-0 border-1px border-gray inline-flex items-center relative cursor-pointer rounded-6px bg-[rgb(61, 79, 88)] h-9 leading-5 text-13px font-medium">
+                    <div class="w-full h-full grid grid-flow-col items-center content-center realtive cursor-pointer gap-1.5 p-11px">Manage your Account</div>
+                </a>
+               </li>
+               <li class="border-box ">
+                <a href="" class="hover:bg-linkItem active:bg-linkItem profileItem relative border-box flex flex-row m-0 w-full pl-5 text-13px text-13px cursor-pointer min-h-45px h-45px pr-11 items-center justify-start bg-transparent">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="shrink-0 mr-4" viewBox="0 0 16 16" aria-hidden="true" role="presentation" focusable="false" style="display: block; height: 20px; width: 20px; fill: #F0A04B; stroke-width: 2;"><path d="M5 8a3 3 0 0 1 2.83 2H14v2H7.83A3 3 0 1 1 5 8zm0 2a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm6-8a3 3 0 1 1-2.83 4H2V4h6.17A3 3 0 0 1 11 2zm0 2a1 1 0 1 0 0 2 1 1 0 0 0 0-2z"></path></svg>
+                    <div class="w-full overflow-hidden py-1">
+                        <div class="inline-flex flex-col items-start justify-center w-full font-bold text-13px text-sandyBrown">Setting</div>
+                    </div>
+                </a>
+               </li>
+               <li class="border-box ">
+                <a href="" class="hover:bg-linkItem active:bg-linkItem profileItem relative border-box flex flex-row m-0 w-full pl-5 text-13px text-13px cursor-pointer min-h-45px h-45px pr-11 items-center justify-start bg-transparent">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="shrink-0 mr-4" viewBox="0 0 32 32" aria-hidden="true" role="presentation" focusable="false" style="display: block; fill: none; height: 20px; width: 20px; stroke: #F0A04B; stroke-width: 2; overflow: visible;"><path d="m6 6 20 20M26 6 6 26"></path></svg>
+                    <div class="w-full overflow-hidden py-1">
+                        <div class="inline-flex flex-col items-start justify-center w-full font-bold text-13px text-sandyBrown">Clear Data</div>
+                    </div>
+                </a>
+               </li>
+               <li>
+    <div class="h-1px my-2 relative separator bg-separator"></div>
+</li>
+<li>
+    <!-- log out -->
+    <form action="/logout" method="post">
+    <button type="submit" class="hover:bg-linkItem hover:text-link active:bg-linkItem relative flex border-box flex-row items-center px-5 w-full text-left cursor-pointer min-h-9 h-9 text-13px transition-colors ease-in-out text-white">
+        Log out
+    </button>
+    </form>
+</li>
+            </ul>
+        </div>
+    </div>
+</div>

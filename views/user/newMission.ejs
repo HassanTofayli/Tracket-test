@@ -1,0 +1,44 @@
+<%-include("../includes/head.ejs")%>
+</head>
+<body>
+    <section>
+        <!-- page header -->
+        <div class="grid grid-cols-3 items-center my-4 px-4 ">
+            <div class=""><button class="main-link" onclick="history.back()">Back</button></div>
+            <div class="main-header text-black col-span-2">New Rout</div>
+        </div>
+        <div class="flex flex-col px-3 justify-between h-full">
+       <div class="px-4">
+        <!-- Set Rout -->
+        <a href="/setRoute">
+        <div class="py-2 flex justify-start items-center w-full border-b-[1px] border-b-[#E8E8E8]">
+            <div><img class="w-[13px] h-[10px] rounded-[8px]" src="images/tick.png" alt=""></div>
+            <div class="mx-4 w-full">
+                <div class="flex justify-between items-center">
+                <p class="text-md font-bold">Choose a rout</p>
+                <p class="text-mainGray text-sm">Straight,Douir</p>
+            </div>
+            </div>
+        
+        </div>
+    </a>
+        <!-- Mission config -->
+        <a href="/setMissionDetails">
+        <div class="py-2 flex justify-start items-center w-full border-b-[1px] border-b-[#E8E8E8]">
+            
+            <div><img class="w-[13px] h-[10px] rounded-[8px]" src="images/false.png" alt=""></div>
+            <div class="mx-4 w-full">
+                <div class="flex justify-between items-center">
+                <p class="text-md font-bold">Mission</p>
+                <p class="text-mainGray text-sm w-40 text-end">(ATM, 15-2-13:45),
+                    Light, Heat, Ultrasonic</p>
+            </div>
+            </div>
+        </div>
+    </a>
+    
+    </div>
+    <div><button class="main-button  bg-main text-white" >Start Mission</button></div>
+</div>    
+    </section>
+    <%-include("../includes/end.ejs")%>

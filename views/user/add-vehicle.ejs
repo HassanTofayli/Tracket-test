@@ -1,0 +1,61 @@
+<%-include("../includes/head.ejs")%>
+</head>
+<body class="p-0 m-0 h-full">
+    <!-- Header -->
+    <%-include("../includes/navBarWOV.ejs")%>
+    <!-- Body -->
+   <div class="flex flex-col space-between p-6 relative min-w-0 z-auto mt-60px">
+    <div>
+        <div>
+            <div class="mt-30px font-bold ">
+                <a href="/" class="text-link text-13px hover:underline">
+                    <i class="fa fa-long-arrow-left pr-1"></i>
+                    Vehicles
+                </a>
+                <h1 class="text-19px font-bold pb-15px m-0">Add a Vehicle</h1>
+            </div>
+            <div class="flex justify-center items-center mb-5 ">
+                <div class="flex flex-col w-450px rounded-3xl shadow-profileInfo border-1px border-hoverSideColor ">
+                    <form action="/add-vehicle" class="bolck m-0 " method="post">
+                        <section class="my-5 block px-6">
+                            <div>
+                                <div class="relative mb-5 ">
+                                    <h4 class="font-bold pt-15px text-lg">Name</h4>
+                                    <input type="text" class="block w-full h-34px pt-1.5 px-3 outline-0  text-13px text-[#303434] border-1px border-inputBorder rounded-3px mt-15px mb-2.5 bg-inputBackground shadow-input leading-tight placeholder:text-[#c1c7ce]" placeholder="Vehicle Name" name="name" value="<%=oldInputs.name%>">
+                                    <p class="text-sm mt-1 text-[#D8000C]"><%if(validationErrors.find(e=>e.param==='name')){%>
+                <%let i=validationErrors.findIndex(e=>e.param==='name')%>
+                <%=validationErrors[i].msg %>
+            <%}%>
+                </p>
+                                </div>
+
+                                <div class="relative mb-5 ">
+                                    <h4 class="font-bold pt-15px text-lg">Serial Number</h4>
+                                    <input type="text" class="block w-full h-34px pt-1.5 px-3 outline-0  text-13px text-[#303434] border-1px border-inputBorder rounded-3px mt-15px mb-2.5 bg-inputBackground shadow-input leading-tight placeholder:text-[#c1c7ce]" placeholder="0000000" name="serialNumber" value="<%=oldInputs.serialNumber%>">
+                                    <p class="text-sm mt-1 text-[#D8000C]"><%if(errorMessage){%>
+                <%=errorMessage%>
+                <%}else{%>
+                <%if(validationErrors.find(e=>e.param==='serialNumber')){%>
+                <%let i=validationErrors.findIndex(e=>e.param==='serialNumber')%>
+                <%=validationErrors[i].msg %>
+            <%}%>
+            <%}%>
+                </p>
+                                </div>
+
+                                <button type="submit" class="mt-30px self-end p-0 border-1px border-sandyBrown items-stretch relative cursor-pointer inline-flex z-0 rounded-6px bg-sandyBrown text-white text-13px leading-5 h-9 font-medium hover:shadow-addBtn">
+                <div class="hidden absolute ring-0 rounded-5px"></div>
+                <div class="grid grid-flow-col justify-center items-center w-full min-h-full h-9 px-11px relative gap-2">Add Vehicle</div>
+            </button>
+                            </div>
+                        </section>
+                  
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+   </div>
+   <script src="/js/profile-script.js"></script>
+    <%-include("../includes/end.ejs")%>
+
